@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I &hearts; Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<div class="desktop-wrapper">
+    
+    <div class="main-content-area">
+        
+        <div class="header-wrapper">
+            <a href="#" id="home-link">
+                <img src="\Images\iLoveCalculator.png" 
+                     alt="Home" 
+                     id="logo-image">
+            </a>
+
+            <nav class="calculator-tabs">
+                <button class="tab-button active" data-target="emi-calculator">EMI Calculator</button>
+                <button class="tab-button" data-target="sip-calculator">SIP Calculator</button>
+                <button class="tab-button" data-target="swp-calculator">SWP Calculator</button>
+            </nav>
+        </div>
+
+        <div id="home-page" class="main-page-section">
+            <div class="container">
+                <h2 style="color: var(--gray); text-align: center; padding: 50px;">
+                    Welcome to the I &hearts; Calculator<br>
+                    <span style="font-size: 0.8em; font-weight: normal;">Select a calculator above to begin.</span>
+                </h2>
+            </div>
+        </div>
+
+        <div id="calculator-view" class="main-page-section active">
+            
+            <div class="calculator-content">
+                
+                <div id="emi-calculator" class="calculator-section active">
+                    <div class="container emi-inner-container">
+                        <div class="inputs-section">
+                            <div class="input-group">
+                                <label>Loan Amount (₹)</label>
+                                <input type="number" class="styled-input" id="amount-input" value="1000000">
+                                <input type="range" id="amount-slider" min="50000" max="10000000" step="10000" value="1000000">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Interest Rate (% p.a)</label>
+                                <input type="number" class="styled-input" id="rate-input" value="8.5" step="0.1">
+                                <input type="range" id="rate-slider" min="1" max="25" step="0.1" value="8.5">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Loan Tenure</label>
+                                <div class="tenure-wrapper">
+                                    <div class="tenure-box">
+                                        <input type="number" class="styled-input" id="tenure-years" value="1">
+                                        <span class="tenure-label">Years</span>
+                                    </div>
+                                    <div class="tenure-box">
+                                        <input type="number" class="styled-input" id="tenure-months" value="0">
+                                        <span class="tenure-label">Months</span>
+                                    </div>
+                                </div>
+                                <div id="tenure-warning" class="warning-msg">Enter Months between 1 to 11 (12 Months = +1 Year)</div>
+                            </div>
+                        </div>
+
+                        <div class="results-section">
+                            <div class="emi-display">
+                                <h2>Monthly EMI</h2>
+                                <div class="emi-amount" id="emi-amount">₹ 0</div>
+                            </div>
+
+                            <div class="chart-container">
+                                <canvas id="emiChart"></canvas>
+                            </div>
+
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <div class="summary-label">Total Interest</div>
+                                    <div class="summary-val" id="total-interest">₹ 0</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="summary-label">Total Amount</div>
+                                    <div class="summary-val" id="total-payment">₹ 0</div>
+                                </div>
+                            </div>
+
+                            <div class="download-actions">
+                                <button class="btn btn-pdf" id="btn-pdf">Download PDF</button>
+                                <button class="btn btn-excel" id="btn-excel">Download Excel</button>
+                                <button class="btn btn-txt" id="btn-txt">Download Text</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="sip-calculator" class="calculator-section">
+                    <div class="container">
+                        <h2 style="text-align:center; color: var(--gray); padding: 50px;">SIP Calculator Coming Soon</h2>
+                    </div>
+                </div>
+
+                <div id="swp-calculator" class="calculator-section">
+                    <div class="container">
+                        <h2 style="text-align:center; color: var(--gray); padding: 50px;">SWP Calculator Coming Soon</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div> 
+
+    <aside class="right-ad-sidebar">
+        <div style="padding: 20px; border: 1px dashed #ccc; text-align: center; height: 600px; background: #f9f9f9; border-radius: 10px;">
+            **ADS / RELATED CONTENT HERE**
+            <p style="margin-top: 10px; color: #777;">(This content is hidden on mobile)</p>
+        </div>
+    </aside>
+
+</div> 
+<script type="module" src="scripts/main.js"></script> 
+
+</body>
+</html>
