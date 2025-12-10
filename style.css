@@ -1,0 +1,243 @@
+:root {
+    --primary: #2018b7;
+    --primary-dark: #3730A3;
+    --success: #10B981;
+    --danger: #EF4444;
+    --gray: #6B7280;
+    --bg: #ffffff;
+    --white: #ffffff;
+    --container: #c2d6eb;
+    --input-shadow: 0 2px 4px rgba(0,0,0,0.05), inset 0 1px 2px rgba(0,0,0,0.1);
+    --focus-ring: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    --chart-principal-color: #c2d6eb;
+    --chart-interest-color: var(--primary);
+    --slider-fill-color: #514bc9;
+    --slider-fill: 0%;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+}
+
+/* --- BASE STYLES & LAYOUT --- */
+
+body {
+    background-color: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    color: #1F2937;
+}
+
+.desktop-wrapper {
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    display: grid;
+    /* 80% Calculator, 20% Sidebar */
+    grid-template-columns: 80% 20%; 
+    gap: 30px; 
+}
+
+.main-content-area { grid-column: 1 / 2; }
+.right-ad-sidebar { grid-column: 2 / 3; }
+
+/* --- HEADER / TABS --- */
+
+.header-wrapper {
+    display: flex;
+    justify-content: flex-start; /* Align Left */
+    gap: 40px; /* Space between logo and tabs */
+    align-items: flex-end; 
+    width: 100%;
+    border-bottom: 2px solid #D1D5DB; 
+    padding-bottom: 0px; 
+    margin-bottom: 30px; 
+}
+
+/* Logo Image Styling */
+#home-link {
+    display: block;
+    text-decoration: none;
+    padding-bottom: 10px; 
+    cursor: pointer;
+}
+#logo-image {
+    height: 40px; 
+    width: 40px;
+    display: block;
+}
+
+/* Tabs Styling */
+.calculator-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-button {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray);
+    border-bottom: 3px solid transparent; 
+    transition: all 0.2s;
+    margin-bottom: -2px; 
+}
+
+.tab-button:hover:not(.active) { color: var(--primary); }
+
+.tab-button.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+/* --- PAGE SECTIONS (Home View vs Calculator View) --- */
+
+.main-page-section { display: none; width: 100%; }
+.main-page-section.active { display: block; }
+
+/* --- CALCULATOR TABS (EMI vs SIP vs SWP) --- */
+/* This is the part that fixes the stacking issue */
+
+.calculator-section {
+    display: none; /* Hide by default */
+    animation: fadeIn 0.4s;
+}
+
+.calculator-section.active {
+    display: block; /* Show only when active */
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(5px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+
+/* --- CALCULATOR CONTAINER --- */
+
+.container {
+    background: var(--container);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 40px;
+}
+/* Grid for EMI Calculator specifically */
+.emi-inner-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+/* --- INPUTS --- */
+.inputs-section { display: flex; flex-direction: column; gap: 30px; }
+.input-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #374151; }
+.styled-input {
+    width: 100%; padding: 10px 15px; font-size: 16px; border: 1px solid #D1D5DB;
+    border-radius: 8px; box-shadow: var(--input-shadow); outline: none; transition: all 0.2s;
+    font-weight: 600; color: var(--primary);
+}
+.styled-input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
+.tenure-wrapper { display: flex; gap: 15px; }
+.tenure-box { flex: 1; }
+.tenure-label { font-size: 12px; color: var(--gray); margin-top: 4px; display: block; }
+
+.warning-msg {
+    color: var(--danger); font-size: 12px; margin-top: 8px; font-weight: 500; display: none;
+    background: #FEF2F2; padding: 6px 10px; border-radius: 6px; border: 1px solid #FECACA;
+}
+
+/* Sliders */
+input[type="range"] {
+    width: 100%; height: 6px;
+    background: linear-gradient(to right, var(--slider-fill-color) 0%, var(--slider-fill-color) var(--slider-fill), #fefefe var(--slider-fill), #E5E7EB 100%);
+    border-radius: 5px; outline: none; -webkit-appearance: none; margin-top: 15px; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px; background: var(--primary);
+    border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- RESULTS --- */
+.results-section {
+    background: #F9FAFB; border-radius: 16px; padding: 30px;
+    display: flex; flex-direction: column; align-items: center; border: 1px solid #E5E7EB;
+}
+.emi-display { text-align: center; margin-bottom: 20px; }
+.emi-display h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
+.emi-amount { font-size: 38px; font-weight: 650; color: var(--primary); margin-top: 5px; }
+.chart-container { height: 220px; width: 220px; position: relative; margin-bottom: 20px; }
+
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-bottom: 25px; }
+.summary-item { background: white; padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.summary-label { font-size: 12px; color: var(--gray); }
+.summary-val { font-weight: 700; color: #111827; }
+
+/* Buttons */
+.download-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; width: 100%; }
+.btn {
+    border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;
+    color: white; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center;
+}
+.btn:hover { opacity: 0.9; }
+.btn-pdf { background-color: var(--danger); }
+.btn-excel { background-color: var(--success); }
+.btn-txt { background-color: var(--gray); }
+
+
+/* --- MOBILE OPTIMIZATION (< 800px) --- */
+
+@media (max-width: 800px) {
+    body { padding: 10px; }
+    
+    .desktop-wrapper {
+        grid-template-columns: 1fr; 
+        gap: 0; padding: 0;
+    }
+    
+    .header-wrapper {
+        flex-direction: column; 
+        align-items: flex-start;
+        border-bottom: none;
+        gap: 15px; 
+        padding-left: 10px;
+    }
+    
+    .calculator-tabs {
+        width: 100%;
+        overflow-x: auto; 
+        justify-content: flex-start; 
+        padding-bottom: 5px; 
+        gap: 5px;
+        -webkit-overflow-scrolling: touch; 
+    }
+    .calculator-tabs::-webkit-scrollbar { display: none; }
+    
+    .tab-button {
+        flex: 0 0 auto;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .right-ad-sidebar { display: none; }
+    
+    .emi-inner-container {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 20px 15px; 
+    }
+
+    .download-actions { grid-template-columns: 1fr; }
+    .btn { padding: 12px; font-size: 14px; }
+    
+    .chart-container { height: 200px; width: 200px; margin: 0 auto 25px; }
+}
